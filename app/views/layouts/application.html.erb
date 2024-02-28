@@ -17,10 +17,17 @@
       <div class="col-3 text-end">
         <!-- TODO: if logged in user, hide Login and Sign Up -->
         <!-- TODO: if logged in user, show user's first name and Logout button -->
+
+      <% if @current_user == nil %>
+        <!-- if no user logged-in, display signup and login links -->
         <a href="/login" class="btn btn-default">Login</a> |
         <a href="/users/new" class="btn btn-default">Signup</a>
-        Hey, You |
+      <% else %>
+        <!-- else, if user logged-in, display user name and logout link -->
+        Hey, <%= @current_user["first_name"] %>
         <a href="/logout" class="btn btn-default">Logout</a>
+      <% end %>
+      
       </div>
     </div>
 
@@ -29,7 +36,11 @@
         <h1 class="display-6 mb-4">Tacostagram</h1>
       </div>
       <div class="col-2 text-end">
-        <a href="/posts/new/" class="btn btn-success">New Post</a>
+        <% if @current_user == nil %>
+          <a href="/login" class="btn btn-success">Please Login to Post</a>
+        <% else %>
+          <a href="/posts/new/" class="btn btn-success">New Post</a>
+        <% end %>
       </div>
     </div>
 
